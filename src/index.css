@@ -11,6 +11,30 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --main-red: #fb3453;
+  --main-blue: #00378f;
+  --main-white: #ffffff;
+  --main-green: #74cb11;
+  --main-red-rbg: 251, 52, 83;
+  --main-blue-rbg: 0, 55, 143;
+  --main-white-rbg: 255, 255, 255;
+  --main-green-rbg: 116, 203, 17;
+}
+
+.main-red {
+  color: var(--main-red);
+}
+.main-blue {
+  color: var(--main-blue);
+}
+.main-white {
+  color: var(--main-white);
+}
+.main-green {
+  color: var(--main-green);
+}
+.main-bg-add-form {
+  background-color: rgba(var(--main-white-rbg), 0.6);
 }
 
 a {
@@ -24,10 +48,13 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
   place-items: center;
+  background-color: #F2F6FA;
   min-width: 320px;
+  width: 100%;
   min-height: 100vh;
+  font-family: "Poppins", sans-serif;
+
 }
 
 h1 {
@@ -52,6 +79,31 @@ button:hover {
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.cancel--button {
+  background-color: rgba(var(--main-red-rbg), 0.2);
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+.cancel--button:hover {
+  transition: all 0.1s ease-in-out;
+  background-color: rgba(var(--main-red-rbg), 0.8);
+  color: var(--main-white);
+  font-weight: bold;
+}
+.confirm--button {
+  background-color: rgba(var(--main-green-rbg), 0.2);
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+.confirm--button:hover {
+  transition: all 0.1s ease-in-out;
+  background-color: rgba(var(--main-green-rbg), 0.8);
+  color: var(--main-white);
+  font-weight: bold;
 }
 
 @media (prefers-color-scheme: light) {
