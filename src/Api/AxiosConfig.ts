@@ -34,11 +34,19 @@ axiosClient.interceptors.response.use(
   }
 );
 
-export const setHeaderConfigAxios = (token) => {
+interface AxiosConfig {
+  headers: {
+    common: {
+      Authorization?: string;
+    };
+  };
+}
+
+export const setHeaderConfigAxios = (token: string | null): void => {
   if (token) {
-    axiosClient.defaults.headers.common["Authorization"] = token ? "Bearer " + token : "";
+    (axiosClient.defaults as AxiosConfig).headers.common["Authorization"] = token ? "Bearer " + token : "";
   } else {
-    delete axiosClient.defaults.headers.common["Authorization"];
+    delete (axiosClient.defaults as AxiosConfig).headers.common["Authorization"];
   }
 };
 

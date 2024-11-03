@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 interface EachCourseProps {
     onClose?: () => void;
     onSave?: () => void;
-    onDeleted?: () => void;
+    onDelete?: () => void;
     isOpen?: boolean;
     Course: any;
 }
@@ -15,10 +15,10 @@ const EachCourse: React.FC<EachCourseProps> = (props) => {
     //     setEachCourse(Course);
     // }, [Course]);
     const [formData, setFormData] = useState({
-        hocKy: '',
-        maHP: '',
-        tenHocPhan: '',
-        soTinChi: '',
+        ns0__hocKy: '',
+        ns0__maMonHoc: '',
+        rdfs__label: '',
+        ns0__soTinChi: '',
         tuChon: false,
         tienQuyet: '',
         hocTruoc: '',
