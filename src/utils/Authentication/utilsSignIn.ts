@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import apiAuth from "../../Api/apiAuth";
 
 interface User {
@@ -6,6 +7,8 @@ interface User {
 }
 
 interface ApiResponse {
+    status: number;
+    data: any;
     token: string;
     user: {
         id: string;

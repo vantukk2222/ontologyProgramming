@@ -5,12 +5,36 @@ interface EachCourseProps {
     onSave?: () => void;
     onDelete?: () => void;
     isOpen?: boolean;
-    Course: any;
+    Course: CourseEach;
+}
+export interface CourseEach {
+    course_id: string;
+    ns0__hocKy: number;
+    ns0__laMonTuChon: boolean;
+    ns0__maMonHoc: string;
+    ns0__soTinChi: number;
+    rdfs__label: string;
+    relations: Array<{
+        rdfs__label: string;
+        relation_id: string;
+        relation_type: string;
+        target_id: string;
+    }>;
 }
 
 const EachCourse: React.FC<EachCourseProps> = (props) => {
-    const { onClose, onSave, onDelete, isOpen, Course } = props;
-    const [eachCourse, setEachCourse] = useState<any>(null);
+    // const { onClose, onSave, onDelete, isOpen, Course } = props;
+    const { onClose, onSave, isOpen, Course } = props;
+
+    // const [eachCourse, setEachCourse] = useState<CourseEach>({
+    //     course_id: '',
+    //     ns0__hocKy: 0,
+    //     ns0__laMonTuChon: false,
+    //     ns0__maMonHoc: '',
+    //     ns0__soTinChi: 0,
+    //     rdfs__label: '',
+    //     relations: []
+    // });
     // useEffect(() => {
     //     setEachCourse(Course);
     // }, [Course]);
@@ -25,8 +49,9 @@ const EachCourse: React.FC<EachCourseProps> = (props) => {
         songHanh: ''
     });
 
-    const handleChange = (e) => {
-        const { name, value, type, checked } = e.target;
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
+        const { name, value, type } = e.target;
+        const checked = (e.target as HTMLInputElement).checked;
         setFormData((prevData) => ({
             ...prevData,
             [name]: type === "checkbox" ? checked : value

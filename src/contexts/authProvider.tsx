@@ -1,14 +1,23 @@
-import React, { createContext, useState } from "react";
-const AuthContext = createContext({});
+import React, { createContext, useState, ReactNode } from "react";
+
+interface AuthContextType {
+  isAuth: boolean;
+  setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
+  user: object;
+  setUser: React.Dispatch<React.SetStateAction<object>>;
+}
+
+const AuthContext = createContext<AuthContextType | undefined>(undefined);
+
 interface AuthProviderProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [isAuth, setIsAuth] = useState(false);
   const [user, setUser] = useState({});
 
-  const contextData = {
+  const contextData: AuthContextType = {
     isAuth,
     setIsAuth,
     user,
@@ -17,5 +26,4 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   return <AuthContext.Provider value={contextData}>{children}</AuthContext.Provider>;
 };
-
 export default AuthContext;

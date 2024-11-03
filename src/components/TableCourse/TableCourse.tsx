@@ -4,7 +4,7 @@ import { searchCourses } from "../../utils/utilsCourse";
 import { toast } from "react-toastify";
 import findTienQuyetRelation from "../../utils/findRelation";
 import usePageIgnition from "../../Hooks/pageInition";
-import EachCourse from "../EachCourse/EachCourse";
+import EachCourse, { CourseEach } from "../EachCourse/EachCourse";
 import { Loading } from "../Loading/Loading";
 
 const TableCourse: React.FC = () => {
@@ -29,7 +29,7 @@ const TableCourse: React.FC = () => {
         fetchData();
     }, []);
 
-    const [selectedCourse, setSelectedCourse] = useState(null);
+    const [selectedCourse, setSelectedCourse] = useState<CourseEach | null>(null);
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const OpenModal = (course: any) => {
@@ -112,7 +112,9 @@ const TableCourse: React.FC = () => {
                         </div>
                     </div>
                 </div>
-                <EachCourse isOpen={isModalOpen} onSave={() => { setIsModalOpen(false) }} onClose={CloseModal} Course={selectedCourse} />
+                {selectedCourse && (
+                    <EachCourse isOpen={isModalOpen} onSave={() => { setIsModalOpen(false) }} onClose={CloseModal} Course={selectedCourse} />
+                )}
             </div>
         </>
     )

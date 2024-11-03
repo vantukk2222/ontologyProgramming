@@ -7,7 +7,7 @@ const Navbar: React.FC = () => {
     return (
         <nav className="flex flex-row bg-white justify-between flex-nowrap p-4 items-center w-full h-fit lg:max-w-[90rem] mx-auto px-4 md:px-8 border-2 border-bottom border-b-slate-200 drop-shadow-sm">
             <a className="flex-none rounded-md focus:outline-none focus:opacity-80" href="/home">
-                {logoSVG()}
+                {logoSVG({ width: 50, height: 50 })}
             </a>
             <Search/>
             <UserDropdown />

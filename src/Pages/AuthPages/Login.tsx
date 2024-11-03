@@ -75,7 +75,7 @@ const Login = () => {
     }
   }, [infor]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     signIn(user)
       .then((res) => {
