@@ -9,7 +9,7 @@ import { CourseEach, CourseRelation, CourseRelationsData, EachCourseProps } from
 
 const EachCourse: React.FC<EachCourseProps> = (props) => {
     // const { onClose, onSave, onDelete, isOpen, Course } = props;
-    const { onClose, onSave, isOpen, Course, role } = props;
+    const { onClose, isOpen, Course, role } = props;
     const [isLoading, setIsLoading] = useState(false);
     const [isDeleting, setIsDeleting] = useState(false);
     const [formData, setFormData] = useState<CourseEach>({

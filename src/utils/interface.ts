@@ -64,7 +64,6 @@ export interface AlertComponentProps {
 }
 export interface EachCourseProps {
     onClose?: () => void;
-    onSave?: () => void;
     onDelete?: () => void;
     isOpen?: boolean;
     Course: CourseEach;

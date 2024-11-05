@@ -417,7 +417,7 @@ const TableCourse: React.FC<TableProps> = (props) => {
                 }
 
                 {selectedCourse && !isAccount && (
-                    <EachCourse role={role} isOpen={isModalOpen} onSave={() => { setIsModalOpen(false) }} onClose={CloseModal} Course={selectedCourse} />
+                    <EachCourse role={role} isOpen={isModalOpen} onClose={CloseModal} Course={selectedCourse} />
                 )}
             </div>
         </>

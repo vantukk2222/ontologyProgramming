@@ -14,7 +14,7 @@ const UserDropdown: React.FC = () => {
         if (infores) {
             console.log("infores", infores);
             const info = JSON.parse(infores);
-            setID(info.elementID);
+            setID(info.elementId);
             setOpenProfile(true);
         }
     }
