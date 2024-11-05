@@ -98,6 +98,7 @@ const EachCourse: React.FC<EachCourseProps> = (props) => {
         }
     }, []);
     console.log("formData", formData);
+    console.log("course", Course);
     function hasCourseChanged(course: CourseEach, formData: CourseEach): boolean {
         // Kiểm tra các thuộc tính riêng lẻ
         if (
@@ -152,21 +153,21 @@ const EachCourse: React.FC<EachCourseProps> = (props) => {
                     })
                 };
             }
-            //  else if (name === "ns0__tienQuyet" || name === "ns0__hocTruoc" || name === "ns0__songHanh" || name === "ns0__coNoiDung") {
-            //     return {
-            //         ...prevData,
-            //         relations: prevData.relations.map((relation) =>
-            //             relation.relation_type === name
-            //                 ? {
-            //                     ...relation,
-            //                     rdfs__label: value,
-            //                     relation_id: relation.relation_id || "",
-            //                     target_id: selectedCourse ? selectedCourse.course_id : relation.target_id
-            //                 }
-            //                 : relation
-            //         )
-            //     };
-            // } 
+             else if (name === "ns0__coNoiDung") {
+                return {
+                    ...prevData,
+                    relations: prevData.relations.map((relation) =>
+                        relation.relation_type === name
+                            ? {
+                                ...relation,
+                                rdfs__label: value,
+                                relation_id: relation.relation_id || "",
+                                target_id: selectedCourse ? selectedCourse.course_id : relation.target_id
+                            }
+                            : relation
+                    )
+                };
+            } 
             else {
                 return {
                     ...prevData,
@@ -225,7 +226,7 @@ const EachCourse: React.FC<EachCourseProps> = (props) => {
                     if (onClose)
                         onClose();
                     setTimeout(() => {
-                        window.location.reload();
+                        // window.location.reload();
                     }, 1500);
                 })
                 .catch((error) => {
@@ -246,7 +247,7 @@ const EachCourse: React.FC<EachCourseProps> = (props) => {
                     if (onClose)
                         onClose();
                     setTimeout(() => {
-                        window.location.reload();
+                        // window.location.reload();
                     }, 1500);
                 })
                 .catch((error) => {
