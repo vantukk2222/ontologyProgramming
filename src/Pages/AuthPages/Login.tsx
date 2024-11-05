@@ -1,24 +1,25 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { signIn } from "../../utils/Authentication/utilsSignIn";
-import utilsDecodeToken from "../../utils/utilsDecodeToken";
 import useAuth from "../../Hooks/useAuth";
-import { setHeaderConfigAxios } from "../../Api/AxiosConfig";
 
 import { toast } from "react-toastify";
+import { InforUser } from "../../utils/interface";
+import { Loading } from "../../components/Loading/Loading";
+
 const Login = () => {
   const { setIsAuth } = useAuth();
   const navigate = useNavigate();
-
+  const [isLoading, setIsLoading] = useState(false);
   useEffect(() => {
     setIsAuth(false);
   }, []);
 
-  const infor = JSON.parse(localStorage.getItem("inforUser") || "{}");
+  const infor: InforUser = JSON.parse(localStorage.getItem("inforUser") || "{}");
 
   const [user, setUser] = useState(() => {
     const user = {
-      username: infor?.userName || "",
+      username: infor?.username || "",
       password: infor?.password || "",
     };
     return user;
@@ -35,64 +36,37 @@ const Login = () => {
   });
 
   useEffect(() => {
-    // const currentTime = new Date();
-    // const expirationTime = new Date(infor.exp);
-    // console.log("expirationTime", infor.exp, currentTime);
-    // if (currentTime < expirationTime) {
-    // }
-    if (infor.exp) {
-      // So sánh với thời gian hiện tại
-      const checkExpiration = () => {
-        const expTime = infor.exp;
-        const expTimeParts = expTime.split(" ");
-        const expDatePart = expTimeParts[1].split("/");
-        const expTimePart = expTimeParts[0].split(":");
+    if (infor && infor.message === "Login successful") {
 
-        const expDate = new Date(
-          expDatePart[2],
-          expDatePart[1] - 1,
-          expDatePart[0],
-          expTimePart[0],
-          expTimePart[1]
-        );
-
-        const currentTime = new Date();
-
-        if (currentTime < expDate) {
-          setIsAuth(true);
-          setHeaderConfigAxios(infor.token);
-          toast.success(
-            `You are logging in with the account: ${infor.userName}!`,
-            {
-              autoClose: 1000,
-            }
-          );
-          navigate("/");
+      setIsAuth(true);
+      toast.success(
+        `You are logging in with the account: ${infor.username}!`,
+        {
+          autoClose: 1000,
         }
-      };
-
-      checkExpiration();
+      );
+      navigate("/");
     }
   }, [infor]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+
     e.preventDefault();
+    setIsLoading(true);
     signIn(user)
       .then((res) => {
         if (res.status == 200 || res.status == 202) {
-          const token = res.data.token;
-          setHeaderConfigAxios(token);
-          const decode = utilsDecodeToken(token);
+          const data = res.data;
           const inforUser = {
-            id: decode.id,
-            role: decode.roles[0],
-            userName: decode.sub,
-            token: token,
-            password: checked === true ? user.password : "",
-            exp: decode.exp,
+            elementId: data.elementId,
+            message: data.message,
+            role: data.role,
+            username: data.username,
+            password: checked ? user.password : "",
           };
           localStorage.setItem("inforUser", JSON.stringify(inforUser));
           setIsAuth(true);
+          setIsLoading(false);
           navigate("/");
           toast.success(`Wellcome ${user.username}!`, {
             autoClose: 1000,
@@ -100,6 +74,7 @@ const Login = () => {
         }
       })
       .catch(() => {
+        setIsLoading(false);
         toast.error("Sorry! Login failed");
       });
   };
@@ -107,10 +82,14 @@ const Login = () => {
   return (
     <>
       <div className="p-10 flex flex-col gap-8">
-        <div className="text-3xl">Login</div>
+        {isLoading && <div id="deleteModal" tabIndex={-1} aria-hidden="true" className="overflow-y-auto overflow-x-hidden fixed inset-0 z-50 flex justify-center items-center">
+          <div className="absolute inset-0 bg-black opacity-50"></div>
+          <Loading />
+        </div>}
+        <div className="text-3xl">Đăng nhập</div>
         <form className="flex flex-col gap-6" onSubmit={(e) => handleSubmit(e)}>
           <div>
-            <div>Username</div>
+            <div>Tên đăng nhập</div>
             <input
               type="text"
               placeholder="Username"
@@ -120,7 +99,7 @@ const Login = () => {
             ></input>
           </div>
           <div>
-            <div>Password</div>
+            <div>Mật khẩu</div>
             <input
               type="password"
               placeholder="Password"
@@ -137,26 +116,14 @@ const Login = () => {
                 onChange={() => setChecked(!checked)}
                 checked={checked}
               ></input>
-              <label className="auth--checkbox-label">Remember me</label>
-            </div>
-            <div>
-              <Link to="" className="underline text-blue-500">
-                Forgot password
-              </Link>
+              <label className="auth--checkbox-label">Lưu tài khoản.</label>
             </div>
           </div>
           <button type="submit" className="auth--button">
-            Login
+            Đăng nhập
           </button>
         </form>
-        <div>
-          <div>
-            Don&apos;t have an account?{" "}
-            <Link to="/register" className="underline text-blue-500">
-              Register
-            </Link>
-          </div>
-        </div>
+
       </div>
     </>
   );

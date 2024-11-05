@@ -20,7 +20,7 @@ const PageContext = createContext<PageContextType | undefined>(undefined);
 export const PageProvider: React.FC<PageProviderProps> = ({ children }) => {
   const [page, setPage] = useState({
     totalPages: 1,
-    pageSize: 30,
+    pageSize: 100,
     pageNumber: 1,
   });
   const contextData = {

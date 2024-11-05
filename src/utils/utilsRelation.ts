@@ -10,6 +10,16 @@ export const getRelationTypes = async () => {
     }
 };
 
+export const getEligibleRelations = async (idCourse: string) => {
+    try {
+        const response = await apiRelation.getEligibleRelation(idCourse);
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching eligible relations:", error);
+        throw error;
+    }
+};
+
 export const addRelationToCourse = async (idCourse: string, relationData: {
     relations: {
         relation_type: string;
@@ -37,3 +47,13 @@ export const updateRelationByID = async (idRelation: string, relationData: {
         throw error;
     }
 };
+
+export const deleteRelationByID = async (id : string) => {
+    try {
+        const response = await apiRelation.deleteRelation(id);
+        return response.data;
+    } catch (error) {
+        console.error("Error deleting relation:", error);
+        throw error;
+    }
+}

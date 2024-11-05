@@ -1,22 +1,15 @@
+import {AuthData } from "../utils/interface";
 import axiosClient from "./AxiosConfig";
 
-interface AuthData {
-  username: string;
-  password: string;
-}
 
-interface ApiAuth {
-  login: (data: AuthData) => Promise<{ token: string }>;
-  register: (data: AuthData) => Promise<{ message: string }>;
-}
 
-const apiAuth: ApiAuth = {
+const apiAuth = {
   login: (data: AuthData) => {
-    const url = "/auth/sign-in";
+    const url = "/login";
     return axiosClient.post(url, data);
   },
   register: (data: AuthData) => {
-    const url = "/auth/sign-up";
+    const url = "/register";
     return axiosClient.post(url, data);
   },
 };

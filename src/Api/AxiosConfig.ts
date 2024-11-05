@@ -1,4 +1,5 @@
 import axios from "axios";
+import { AxiosConfig } from "../utils/interface";
 
 const axiosClient = axios.create({
   baseURL: "http://192.168.2.53:5000/",
@@ -34,13 +35,7 @@ axiosClient.interceptors.response.use(
   }
 );
 
-interface AxiosConfig {
-  headers: {
-    common: {
-      Authorization?: string;
-    };
-  };
-}
+
 
 export const setHeaderConfigAxios = (token: string | null): void => {
   if (token) {

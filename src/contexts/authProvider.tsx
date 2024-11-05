@@ -1,11 +1,7 @@
 import React, { createContext, useState, ReactNode } from "react";
+import { AuthContextType } from "../utils/interface";
 
-interface AuthContextType {
-  isAuth: boolean;
-  setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
-  user: object;
-  setUser: React.Dispatch<React.SetStateAction<object>>;
-}
+
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 

@@ -4,7 +4,12 @@ const apiRelation = {
         const url = `/structure/relation-types`;
         return axiosClient.get(url);
         },
-        addRelation: (idCourse: string, data: any) => {
+    getEligibleRelation: (idCourse: string) => {
+        const url = `/courses/${idCourse}/eligible-relations`;
+        return axiosClient.get(url);
+        },
+
+    addRelation: (idCourse: string, data: any) => {
         // {
         //     "relations": [
         //       {
@@ -20,7 +25,7 @@ const apiRelation = {
         const url = `courses/${idCourse}/relations`;
         return axiosClient.post(url, data);
         },
-        updateRelation: (idRelation: string, data: any) => {
+    updateRelation: (idRelation: string, data: any) => {
         // {
         //     "relation_type": "ns0__tienQuyet",
         //     "target_id": "4:e33d50a5-f668-425e-b2d8-a6a2f521b315:51"
@@ -28,7 +33,12 @@ const apiRelation = {
         
         const url = `/courses/relations/${idRelation}`;
         return axiosClient.put(url, data);
-    }
+    },
+    deleteRelation: (idRelation: string) => {
+        const url = `/structure/relations/${idRelation}`;
+        return axiosClient.delete(url);
+    },
+
 };
 
 

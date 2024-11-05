@@ -1,10 +1,6 @@
 import React from "react";
-interface AlertComponentProps {
-  onConfirm: () => void;
-  content: string;
-  onCancel?: () => void;
-  type: "danger" | "success" | "warning";
-}
+import { AlertComponentProps } from "../../utils/interface";
+
 
 const AlertComponent: React.FC<AlertComponentProps> = (props: AlertComponentProps) => {
   const { onConfirm, content, onCancel, type } = props;

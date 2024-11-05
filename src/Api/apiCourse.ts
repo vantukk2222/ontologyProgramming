@@ -1,13 +1,17 @@
+import { SearchParams } from "../utils/interface";
 import axiosClient from "./AxiosConfig";
-interface SearchParams {
-    page: number;
-    limit: number;
+interface queryBody {
+    query: string
 }
 
 const apiCourse = {
     search: (search: SearchParams) => {
         const url = `/courses?page=${search.page}&limit=${search.limit}`;
         return axiosClient.get(url);
+    },
+    searchByQuery: (query: queryBody ) => {
+        const url = `/search`;
+        return axiosClient.post(url, query);
     },
     getByID: (ID: string) => {
         const url = "/courses/" + ID;
@@ -17,10 +21,15 @@ const apiCourse = {
         const url = "/courses";
         return axiosClient.post(url, data);
     },
-    updateCourse: (data: any) => {
-        const url = "/courses";
+    updateCourse: (idCourse: string, data: any) => {
+        const url = `/courses/${idCourse}`;
         return axiosClient.put(url, data);
-    }
+    },
+    deleteCourse: (ID: string) => {
+        const url = "/courses/" + ID;
+        return axiosClient.delete(url);
+    },
+
 };
 
 

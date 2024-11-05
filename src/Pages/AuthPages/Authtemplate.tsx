@@ -15,8 +15,8 @@ const Authtemplate: React.FC<AuthtemplateProps> = (props) => {
         <div className="auth-container-item">
           <div className="p-4 auth-container-item-left">
             <div className="auth--title">
-              Welcome to <br />
-              Education Program Management
+              Chào mừng bạn <br />
+              đến với quản lý chương trình đào tạo
             </div>
           </div>
           <div>{pages === "login" ? <Login /> : pages === "register" ? <Register /> : <></>}</div>

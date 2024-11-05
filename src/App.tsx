@@ -19,6 +19,7 @@ const App = () => {
         {/* anh em thêm route ở đây nhé, có thể lồng Route trong Route */}
         <Route path="login" element={<Authtemplate pages="login" />} />
         <Route path="register" element={<Authtemplate pages="register" />} />
+        <Route path="/" element={<Dashboard />} />
         <Route path="home" element={<Dashboard/>}/>
         <Route path="*" element={<PageNotFound />} />
       </>

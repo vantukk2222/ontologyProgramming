@@ -6,17 +6,14 @@ interface User {
     password: string;
 }
 
-interface ApiResponse {
-    status: number;
-    data: any;
-    token: string;
-    user: {
-        id: string;
-        name: string;
-    };
-}
 
-export const signIn = async (user: User): Promise<ApiResponse> => {
-    const response = await apiAuth.login(user) as ApiResponse;
-    return response;
+
+export const signIn = async (user: User) => {
+    try {
+        const response = await apiAuth.login(user);
+        return response
+    } catch (error) {
+        console.error("Error searching courses by query:", error);
+        throw error;
+    }
 }
