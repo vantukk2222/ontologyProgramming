@@ -231,7 +231,9 @@ const TableCourse: React.FC<TableProps> = (props) => {
                             }
                         </div>
 
-                        {!isAccount &&
+
+                    </div>}
+                    {!isAccount &&
                             <div className="relative justify-end pl-10  max-w-md mx-auto  relative z-15 w-[30rem]">
                                 <input
                                     type="text"
@@ -278,8 +280,8 @@ const TableCourse: React.FC<TableProps> = (props) => {
                                 renderSuggestion={renderSuggestion}
                                 inputProps={inputProps}
                             /> */}
-                            </div>}
-                    </div>}
+                            </div>
+                        }
 
                 <div className="-m-1.5 overflow-x-auto max-h-[92%] mt-12 mb-12">
                     {data && !isAccount &&

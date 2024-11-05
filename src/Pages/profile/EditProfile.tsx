@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { UserData } from "../../utils/interface";
+import { InforUser, UserData } from "../../utils/interface";
 import { Loading } from "../../components/Loading/Loading";
-import { fetchUserByID, updateUserByID, changePassword } from "../../utils/utilsUser";
+import { fetchUserByID, updateUserByID, changePassword, deleteUserByID } from "../../utils/utilsUser";
 import { toast } from "react-toastify";
 import ReactDOM from 'react-dom';
 
@@ -16,6 +16,7 @@ export const EditProfile: React.FC<EditProfileProps> = (props) => {
     const [loading, setLoading] = useState(false);
     const [isChangePassword, setIsChangePassword] = useState(false);
     const [passwordData, setPasswordData] = useState({ oldPassword: "", newPassword: "", confirmPassword: "" });
+    const infor: InforUser = JSON.parse(localStorage.getItem("inforUser") || "{}");
 
     interface InputChangeEvent {
         target: {
@@ -26,12 +27,15 @@ export const EditProfile: React.FC<EditProfileProps> = (props) => {
 
     useEffect(() => {
         if (ID) {
+            setLoading(true);
             try {
                 fetchUserByID(ID).then((res) => {
+                    setLoading(false);
                     setUserSelect(res.data.user);
                 })
             } catch (error) {
                 toast.error("Lỗi khi lấy thông tin tài khoản." + error);
+                setLoading(false);
                 console.log(error);
             }
         }
@@ -114,6 +118,22 @@ export const EditProfile: React.FC<EditProfileProps> = (props) => {
             }
         }
     };
+    const handleRemove = () => {
+        try {
+            if (userSelect?.user_id) {
+                deleteUserByID(userSelect.user_id).then((res) => {
+                    if (res.status === 200) {
+                        toast.success("Xoá tài khoản thành công.");
+                        setLoading(false);
+                        setModal(false);
+                    }
+                });
+            }
+        } catch (error) {
+            toast.error("Xoá tài khoản thất bại." + error);
+            setLoading(false);
+        }
+    }
 
     return (
         ReactDOM.createPortal(
@@ -249,12 +269,28 @@ export const EditProfile: React.FC<EditProfileProps> = (props) => {
                                     </div>
                                 </>
                             )}
-                            <div>
+                            <div className="flex flex-row space-x-6">
                                 <button
                                     type="submit"
                                     className="w-full py-2 text-white bg-purple-500 rounded-md hover:bg-purple-600"
                                 >
                                     {isChangePassword ? "Đổi mật khẩu" : "Lưu"}
+                                </button>
+                                {infor?.role === "admin" && userSelect?.role !== "admin"&&
+                                    <button
+                                        type="button"
+                                        onClick={handleRemove}
+                                        className="w-full py-2 text-white bg-red-500 rounded-md hover:bg-red-600"
+                                    >
+                                        Xoá
+                                    </button>}
+                                <button
+                                    type="button"
+                                    onClick={() => setModal(false)}
+
+                                    className="w-full py-2 text-black bg-white rounded-md hover:bg-white"
+                                >
+                                    Huỷ
                                 </button>
                             </div>
                         </form>
