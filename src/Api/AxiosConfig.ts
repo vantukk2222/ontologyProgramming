@@ -2,7 +2,7 @@ import axios from "axios";
 import { AxiosConfig } from "../utils/interface";
 
 const axiosClient = axios.create({
-  baseURL: "https://b593-116-105-79-103.ngrok-free.app/",
+  baseURL: " https://1546-117-2-255-206.ngrok-free.app/",
   headers: {
     "Content-Type": "application/json",
     Accept: "*",
