@@ -49,10 +49,9 @@ const AddEachCourse: React.FC<AddEachCourseProps> = (props) => {
         if (formData) {
             addNewCourse(formData).then((result) => {
                 if (result) {
-                    toast.success("Thêm môn học thành công.");
                     addRelationToCourse(result.course.course_id, { relations: [rdftypeRelation] }).then(() => {
                         setTimeout(() => {
-                            toast.success("Thêm quan hệ thành công");
+                            toast.success("Thêm môn học thành công.");
                             setIsLoading(false);
                             if (onClose)
                                 onClose();
@@ -184,7 +183,6 @@ const AddEachCourse: React.FC<AddEachCourseProps> = (props) => {
                                     <label className="text-sm font-medium">Tự chọn</label>
                                     <input
                                         type="checkbox"
-                                        required
                                         name="ns0__laMonTuChon"
                                         disabled={role === "admin" ? false : true}
                                         checked={formData.ns0__laMonTuChon}
