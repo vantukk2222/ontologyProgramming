@@ -266,7 +266,7 @@ const TableCourse: React.FC<TableProps> = (props) => {
                                                     }}
                                                     className="p-3 hover:bg-gray-100 cursor-pointer border-b w-[30rem]"
                                                 >
-                                                    {result.rdfs__label} (Độ tương đồng: {result.similarity.toFixed(2)})
+                                                    {result.rdfs__label}
                                                 </li>
                                             ))}
                                         </ul>
