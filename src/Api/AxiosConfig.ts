@@ -2,7 +2,7 @@ import axios from "axios";
 import { AxiosConfig } from "../utils/interface";
 
 const axiosClient = axios.create({
-  baseURL: " https://b2cd-113-23-5-103.ngrok-free.app/",
+  baseURL: process.env.api_URL || "https:", // Use environment variable or fallback
   headers: {
     "Content-Type": "application/json",
     Accept: "*",
