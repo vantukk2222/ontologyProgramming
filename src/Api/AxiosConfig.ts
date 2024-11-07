@@ -2,7 +2,7 @@ import axios from "axios";
 import { AxiosConfig } from "../utils/interface";
 
 const axiosClient = axios.create({
-  baseURL: process.env.url_API, // Use environment variable or fallback
+  baseURL: process.env.REACT_APP_url_API, // Use environment variable or fallback
   headers: {
     "Content-Type": "application/json",
     Accept: "*",
