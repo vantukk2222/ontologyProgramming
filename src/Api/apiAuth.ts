@@ -10,6 +10,7 @@ const apiAuth = {
   },
   register: (data: AuthData) => {
     const url = "/register";
+    console.log("API URL:", process.env.REACT_APP_url_API);
     return axiosClient.post(url, data);
   },
 };
